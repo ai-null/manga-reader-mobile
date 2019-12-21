@@ -1,24 +1,136 @@
 // @flow
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, StatusBar} from 'react-native';
+import {StyleSheet, StatusBar, SafeAreaView, FlatList} from 'react-native';
 
-type Props = {};
+import {black2nd, white} from '../../config';
+import Appbar from '../Appbar';
+import Card from '../Card';
 
-export default class Discover extends Component<Props, {}> {
+type State = {
+  data: array,
+};
+
+export default class Discover extends Component<{}, State, void> {
+  state = {
+    data: [
+      {
+        id: 1,
+        title: 'title',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 2,
+        title: 'title1',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 3,
+        title: 'title2',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 4,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 5,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 6,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 7,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 8,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 9,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 10,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 11,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+      {
+        id: 12,
+        title: 'title3',
+        subtitle: 'kontol',
+        source:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
+      },
+    ],
+  };
+
+  renderItem = ({item}) => {
+    const {title, subtitle, source} = item;
+
+    return <Card title={title} subtitle={subtitle} source={source} />;
+  };
+
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#333" />
-        <Text>Hello World</Text>
-      </View>
+      <>
+        <StatusBar barStyle="dark-content" backgroundColor={white} />
+        <SafeAreaView>
+          <Appbar name="MangaEden" />
+          <FlatList
+            style={styles.flatlist}
+            contentContainerStyle={styles.content}
+            numColumns={3}
+            data={this.state.data}
+            renderItem={this.renderItem}
+            keyExtractor={key => JSON.stringify(key.id)}
+          />
+        </SafeAreaView>
+      </>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  flatlist: {
+    marginBottom: 56,
+  },
+  content: {
+    padding: 15,
   },
 });
