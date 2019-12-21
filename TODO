@@ -1,0 +1,48 @@
+
+TODO:
+  List:
+    ☐ Make Screens functions with dummies
+    ☐ Make redux controller with real data
+    ☐ Testing
+
+  Process:
+    ☐ Make components First based on current screens (Discover) @started(19-12-21 10:35)
+
+  Done:
+
+  Cancelled:
+
+
+
+
+App:
+  COMPONENTS:
+    ☐ Appbar
+    ☐ Bottombar *(Discover + compass (?), Favorite + Heart)*
+    ☐ Card Items
+    ☐ Card Description
+    ☐ Tags
+    ☐ Searchbar
+    ☐ Header like nhReader
+    ☐ Image Slider
+    ☐ Button Read + book icon
+    ☐ Button Favorite + heart icon
+  
+  SCREENS:
+    
+    Discover:
+      ☐ Show Appbar with sourceName
+      ☐ Show list of manga (from newest to oldest)
+      ☐ Infinite scroll ? No, just show 40 listings
+      ☐ Show Bottombar
+    
+    Detail:
+      ☐ Show Appbar with title of the manga
+      ☐ Show manga cover
+      ☐ Show manga description
+      ☐ Show manga tags
+
+    Read (Slider):
+    
+    Favorites:
+  
