@@ -4,7 +4,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Appbar as PaperAppBar} from 'react-native-paper';
 
-import {white} from '../config';
+import {white, black3rd} from '../config';
 
 type Props = {
   name: string,
@@ -13,7 +13,7 @@ type Props = {
 const Appbar = ({name}: Props) => {
   return (
     <PaperAppBar style={styles.appbar}>
-      <PaperAppBar.Content title={name} />
+      <PaperAppBar.Content title={name} titleStyle={styles.title} />
     </PaperAppBar>
   );
 };
@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: white,
+  },
+  title: {
+    color: black3rd,
   },
 });
 

@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, StatusBar, SafeAreaView, FlatList} from 'react-native';
 
-import {black2nd, white} from '../../config';
+import {white, white2nd} from '../../config';
 import Appbar from '../Appbar';
 import Card from '../Card';
 
@@ -15,85 +15,74 @@ export default class Discover extends Component<{}, State, void> {
     data: [
       {
         id: 1,
-        title: 'title',
-        subtitle: 'kontol',
+        title: 'title sangat panjang',
+        subtitle: 'ainulbedjo',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 2,
         title: 'title1',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 3,
         title: 'title2',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 4,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 5,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 6,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 7,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 8,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 9,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 10,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 11,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
       {
         id: 12,
         title: 'title3',
-        subtitle: 'kontol',
         source:
           'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
       },
@@ -132,5 +121,6 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 15,
+    backgroundColor: white2nd,
   },
 });
