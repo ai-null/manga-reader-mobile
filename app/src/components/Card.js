@@ -12,9 +12,10 @@ type Props = {
 const {width} = Dimensions.get('window');
 
 // TODO: make simpler cards
-const Card = ({title, subtitle, source}): Props => {
+const Card = (props: Props) => {
+  const {title, subtitle, source} = props;
   return (
-    <PaperCard style={styles.card} onPress={() => {}}>
+    <PaperCard style={styles.card} onPress={() => props.navigate('Detail')}>
       <PaperCard.Cover
         source={{uri: source}}
         style={styles.cover}

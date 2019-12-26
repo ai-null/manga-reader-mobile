@@ -8,7 +8,7 @@ TODO:
     ☐ Testing
 
   Process:
-    ☐ Make components First based on current screens (Detail) @started(19-12-21 13:40)
+    ✔ Make components First based on current screens (Detail) @started(19-12-21 13:40) @done(19-12-24 15:26) @lasted(3d1h46m47s)
 
   Done:
     ✔ Make components First based on current screens (Discover) @started(19-12-21 10:35) @done(19-12-21 13:40) @lasted(3h5m44s)
@@ -23,27 +23,28 @@ App:
     ✔ Appbar @done(19-12-21 13:41)
     ✔ Bottombar *(Discover + compass (?), Favorite + Heart)* @done(19-12-21 13:41)
     ✔ Card Items @done(19-12-21 13:41)
-    ☐ Card Description
-    ☐ Tags
-    ☐ Searchbar
+    ✔ Card Description @done(19-12-23 14:22)
+    ✔ Header @done(19-12-23 14:22)
+    ✔ Tags @done(19-12-24 15:26)
+    ✘ Searchbar @cancelled(19-12-23 14:22)
     ✘ Header like nhReader @cancelled(19-12-21 13:41)
-    ☐ Image Slider
-    ☐ Button Read + book icon
-    ☐ Button Favorite + heart icon
+    ☐ Image Slider @critical 
+    ✔ Button Read + book icon @done(19-12-24 15:26)
+    ✔ Button Favorite + heart icon @done(19-12-24 15:26)
   
   SCREENS:
     
     Discover:
       ✔ Show Appbar with sourceName @done(19-12-21 13:41)
-      ☐ Show list of manga (from newest to oldest)
+      ☐ Show list of manga (from newest to oldest) @high 
       ✔ Infinite scroll ? No, just show 40 listings @done(19-12-21 13:41)
       ✔ Show Bottombar @done(19-12-21 13:42)
     
     Detail:
-      ☐ Show Appbar with title of the manga
-      ☐ Show manga cover
-      ☐ Show manga description
-      ☐ Show manga tags
+      ✘ Show Appbar with title of the manga @cancelled(19-12-24 15:27)
+      ✔ Show manga cover @done(19-12-24 15:27)
+      ✔ Show manga description @done(19-12-24 15:27)
+      ✔ Show manga tags @done(19-12-24 15:27)
 
     Read (Slider):
     

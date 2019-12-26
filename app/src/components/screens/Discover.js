@@ -92,7 +92,14 @@ export default class Discover extends Component<{}, State, void> {
   renderItem = ({item}) => {
     const {title, subtitle, source} = item;
 
-    return <Card title={title} subtitle={subtitle} source={source} />;
+    return (
+      <Card
+        title={title}
+        subtitle={subtitle}
+        source={source}
+        {...this.props.navigation}
+      />
+    );
   };
 
   render() {

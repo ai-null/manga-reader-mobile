@@ -8,11 +8,16 @@ import {white, black3rd} from '../config';
 
 type Props = {
   name: string,
+  backaction: boolean,
 };
 
-const Appbar = ({name}: Props) => {
+const Appbar = (props: Props) => {
+  const {name, backaction} = props;
   return (
     <PaperAppBar style={styles.appbar}>
+      {backaction ? (
+        <PaperAppBar.BackAction onPress={() => props.goBack()} />
+      ) : null}
       <PaperAppBar.Content title={name} titleStyle={styles.title} />
     </PaperAppBar>
   );
