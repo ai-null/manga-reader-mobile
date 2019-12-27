@@ -5,10 +5,11 @@ import {
   SafeAreaView,
   StyleSheet,
   StatusBar,
-  ScrollView,
   Image,
   Dimensions,
   ToastAndroid,
+  ScrollView,
+  Animated,
 } from 'react-native';
 import {Title, Surface, Button, Subheading} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,11 +19,40 @@ import ChapterItem from '../ChapterItem';
 import {white, white2nd, black3rd, IMAGE_URI} from '../../config';
 
 const {width} = Dimensions.get('window');
+const {Value, event, delay} = Animated;
 
 export default class Detail extends Component {
-  state = {
-    favorite: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      favorite: false,
+    };
+
+    this.scrollY = new Value(0);
+    this.title = new Value(0);
+
+    const THROTTLE = 50 + 155 + 20;
+
+    this.animatedCover = this.scrollY.interpolate({
+      inputRange: [0, THROTTLE],
+      outputRange: [0, THROTTLE / 2 - 20],
+      extrapolate: 'clamp',
+    });
+
+    this.onScroll = event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {y: this.scrollY},
+          },
+        },
+      ],
+      {
+        useNativeDriver: true,
+      },
+    );
+  }
 
   _onFavoritePress = () => {
     let message = this.state.favorite
@@ -34,6 +64,7 @@ export default class Detail extends Component {
   };
 
   render() {
+    // console.log(this.scrollY);
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={white} />
@@ -43,15 +74,24 @@ export default class Detail extends Component {
             name={this.props.navigation.state.routeName}
             {...this.props.navigation}
           />
-          <ScrollView
+          <Animated.ScrollView
+            scrollEventThrottle={1}
+            onScroll={this.onScroll}
             contentContainerStyle={styles.container}
             style={styles.scrollView}
             showsVerticalScrollIndicator={false}>
             <Surface style={styles.header}>
-              <Image
+              <Animated.Image
                 source={{uri: IMAGE_URI}}
-                style={styles.backgroundCover}
-                blurRadius={1}
+                style={{
+                  ...styles.backgroundCover,
+                  transform: [
+                    {
+                      translateY: this.animatedCover,
+                    },
+                  ],
+                }}
+                blurRadius={0.6}
               />
               <View style={styles.wrapper}>
                 <View>
@@ -102,7 +142,7 @@ export default class Detail extends Component {
               <Subheading style={{...styles.subheading, marginBottom: 20}}>
                 Chapters
               </Subheading>
-              <Surface style={{elevation: 1.3, width: width - 40}}>
+              <Surface style={{elevation: 1.3}}>
                 <ChapterItem title="Chapter 1 - ainul ganteng ea" />
                 <ChapterItem title="Chapter 2 - gatau ah" />
                 <ChapterItem title="Chapter 3 - males" />
@@ -115,19 +155,7 @@ export default class Detail extends Component {
                 </View>
               </Surface>
             </Surface>
-            <View
-              style={{
-                justifyContent: 'center',
-                padding: 0,
-                paddingBottom: 20,
-                alignItems: 'center',
-                // backgroundColor: 'white',
-              }}>
-              <Text style={{color: black3rd}}>
-                made with love by Ainulbedjo
-              </Text>
-            </View>
-          </ScrollView>
+          </Animated.ScrollView>
         </SafeAreaView>
       </>
     );
@@ -137,9 +165,9 @@ export default class Detail extends Component {
 const styles = StyleSheet.create({
   container: {backgroundColor: white2nd},
   scrollView: {marginBottom: 56},
-  header: {elevation: 2},
+  header: {elevation: 2, overflow: 'hidden'},
   backgroundCover: {
-    width: width,
+    width: '100%',
     height: '100%',
     resizeMode: 'cover',
     position: 'absolute',
@@ -151,7 +179,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'relative',
   },
-  cover: {width: 105, height: 150, resizeMode: 'contain'},
+  cover: {
+    width: 105,
+    height: 155,
+    resizeMode: 'cover',
+    backgroundColor: 'white',
+  },
   titleWrapper: {
     justifyContent: 'flex-end',
     marginLeft: 10,
@@ -176,25 +209,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 3,
     display: 'flex',
+    padding: 15,
+    paddingVertical: 10,
   },
   button: {
     flex: 1,
-    padding: 10,
+    marginHorizontal: 5,
   },
   subheading: {
-    marginTop: 10,
+    marginTop: 20,
     color: black3rd,
     fontWeight: 'bold',
   },
   chapters: {
     elevation: 2,
-    // width: width - 40,
     marginTop: 20,
     padding: 20,
     paddingTop: 0,
-    marginBottom: 20,
   },
   buttonContainer: {
-    padding: 10,
+    padding: 20,
   },
 });
