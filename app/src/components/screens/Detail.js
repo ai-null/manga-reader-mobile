@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   StatusBar,
+  Text,
   Image,
   Dimensions,
   ToastAndroid,
@@ -159,6 +160,19 @@ export default class Detail extends PureComponent {
                 </View>
               </Surface>
             </Surface>
+            {/* <View
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{
+                justifyContent: 'center',
+                padding: 0,
+                paddingBottom: 20,
+                alignItems: 'center',
+                // backgroundColor: 'white',
+              }}>
+              <Text style={{color: black3rd}}>
+                made with love by Ainulbedjo
+              </Text>
+            </View> */}
           </Animated.ScrollView>
         </SafeAreaView>
       </>
@@ -171,7 +185,7 @@ const styles = StyleSheet.create({
   scrollView: {marginBottom: 56},
   header: {elevation: 2, overflow: 'hidden'},
   backgroundCover: {
-    width: '100%',
+    width: width,
     height: '100%',
     resizeMode: 'cover',
     position: 'absolute',
@@ -183,12 +197,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'relative',
   },
-  cover: {
-    width: 105,
-    height: 155,
-    resizeMode: 'cover',
-    backgroundColor: 'white',
-  },
+  cover: {width: 105, height: 150, resizeMode: 'contain'},
   titleWrapper: {
     justifyContent: 'flex-end',
     marginLeft: 10,
@@ -213,28 +222,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 3,
     display: 'flex',
-    padding: 15,
-    paddingVertical: 10,
   },
   button: {
     flex: 1,
-    marginHorizontal: 5,
+    padding: 10,
   },
   subheading: {
-    marginTop: 20,
+    marginTop: 10,
     color: black3rd,
     fontWeight: 'bold',
   },
   chapters: {
     elevation: 2,
+    // width: width - 40,
     marginTop: 20,
     padding: 20,
     paddingTop: 0,
+    marginBottom: 20,
   },
   subChapters: {
     elevation: 1.3,
   },
   buttonContainer: {
-    padding: 20,
+    padding: 10,
   },
 });

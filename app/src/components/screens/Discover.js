@@ -53,10 +53,9 @@ class Discover extends React.Component<{}, State> {
 
   _renderItem = ({item}) => {
     const {t, im, s} = item;
-    const source = 'https://cdn.mangaeden.com/mangasimg/' + im;
 
     return (
-      <Card title={t} subtitle={s} source={source} {...this.props.navigation} />
+      <Card title={t} subtitle={s} source={im} {...this.props.navigation} />
     );
   };
 

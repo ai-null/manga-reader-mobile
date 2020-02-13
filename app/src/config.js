@@ -44,6 +44,8 @@ export const DETAIL_MANGA = 'https://www.mangaeden.com/api/manga/';
  */
 export const CHAPTER = 'https://www.mangaeden.com/api/chapter/';
 
+export const PLACEHOLDER_IMAGE = 'https://cdn.mangaeden.com/mangasimg/';
+
 // REDUX
 export const GET_DISCOVER_DATA = 'GET_DISCOVER_DATA';
 export const GET_DETAIL_MANGA = 'GET_DETAIL_MANGA';

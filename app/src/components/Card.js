@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, Dimensions, View} from 'react-native';
 import {Card as PaperCard, Text} from 'react-native-paper';
-import {black2nd} from '../config';
+import {black2nd, PLACEHOLDER_IMAGE} from '../config';
 
 type Props = {
   title: String,
@@ -41,7 +41,7 @@ class Card extends React.PureComponent<Props, State> {
         style={styles.card}
         onPress={() => this.props.navigate('Detail')}>
         <PaperCard.Cover
-          source={isFailed ? uri : {uri: source}}
+          source={isFailed ? uri : {uri: PLACEHOLDER_IMAGE + source}}
           style={styles.cover}
           defaultSource={require('../../assets/placeholder_no_image.png')}
           onError={this._onError}
