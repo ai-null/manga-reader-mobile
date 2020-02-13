@@ -11,17 +11,27 @@ type Props = {
   backaction: boolean,
 };
 
-const Appbar = (props: Props) => {
-  const {name, backaction} = props;
-  return (
-    <PaperAppBar style={styles.appbar}>
-      {backaction ? (
-        <PaperAppBar.BackAction onPress={() => props.goBack()} />
-      ) : null}
-      <PaperAppBar.Content title={name} titleStyle={styles.title} />
-    </PaperAppBar>
-  );
-};
+export default class Appbar extends React.PureComponent<Props, {}> {
+  _onPress = () => {
+    const {navigateTo} = this.props;
+
+    if (navigateTo) {
+      this.props.navigate(navigateTo);
+    } else {
+      this.props.goBack();
+    }
+  };
+
+  render() {
+    const {name, backaction} = this.props;
+    return (
+      <PaperAppBar style={styles.appbar}>
+        {backaction ? <PaperAppBar.BackAction onPress={this._onPress} /> : null}
+        <PaperAppBar.Content title={name} titleStyle={styles.title} />
+      </PaperAppBar>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   appbar: {
@@ -34,5 +44,3 @@ const styles = StyleSheet.create({
     color: black3rd,
   },
 });
-
-export default Appbar;

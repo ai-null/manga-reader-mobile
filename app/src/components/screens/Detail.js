@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
   View,
-  Text,
   SafeAreaView,
   StyleSheet,
   StatusBar,
   Image,
   Dimensions,
   ToastAndroid,
-  ScrollView,
   Animated,
 } from 'react-native';
 import {Title, Surface, Button, Subheading} from 'react-native-paper';
@@ -19,9 +17,10 @@ import ChapterItem from '../ChapterItem';
 import {white, white2nd, black3rd, IMAGE_URI} from '../../config';
 
 const {width} = Dimensions.get('window');
-const {Value, event, delay} = Animated;
+const {Value, event} = Animated;
+const THROTTLE = 50 + 155 + 20;
 
-export default class Detail extends Component {
+export default class Detail extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -30,15 +29,6 @@ export default class Detail extends Component {
     };
 
     this.scrollY = new Value(0);
-    this.title = new Value(0);
-
-    const THROTTLE = 50 + 155 + 20;
-
-    this.animatedCover = this.scrollY.interpolate({
-      inputRange: [0, THROTTLE],
-      outputRange: [0, THROTTLE / 2 - 20],
-      extrapolate: 'clamp',
-    });
 
     this.onScroll = event(
       [
@@ -63,18 +53,29 @@ export default class Detail extends Component {
     ToastAndroid.show(message, 2000);
   };
 
+  _onReadPress = () => {
+    this.props.navigation.navigate('Read');
+  };
+
   render() {
-    // console.log(this.scrollY);
+    let translateY = this.scrollY.interpolate({
+      inputRange: [0, THROTTLE],
+      outputRange: [0, THROTTLE / 2 - 20],
+      extrapolate: 'clamp',
+    });
+
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={white} />
         <SafeAreaView>
           <Appbar
             backaction={true}
+            navigateTo="Discover"
             name={this.props.navigation.state.routeName}
             {...this.props.navigation}
           />
           <Animated.ScrollView
+            bounces={false}
             scrollEventThrottle={1}
             onScroll={this.onScroll}
             contentContainerStyle={styles.container}
@@ -87,7 +88,7 @@ export default class Detail extends Component {
                   ...styles.backgroundCover,
                   transform: [
                     {
-                      translateY: this.animatedCover,
+                      translateY,
                     },
                   ],
                 }}
@@ -98,7 +99,7 @@ export default class Detail extends Component {
                   <Image
                     source={{uri: IMAGE_URI}}
                     style={styles.cover}
-                    defaultSource={require('../../../assets/1.jpg')}
+                    defaultSource={require('../../../assets/placeholder_no_image.png')}
                   />
                 </View>
                 <View style={styles.titleWrapper}>
@@ -118,7 +119,7 @@ export default class Detail extends Component {
                     mode="outlined"
                     children="read"
                     icon="book-open-page-variant"
-                    onPress={() => {}}
+                    onPress={this._onReadPress}
                   />
                 </View>
                 <View style={styles.button}>
@@ -142,14 +143,17 @@ export default class Detail extends Component {
               <Subheading style={{...styles.subheading, marginBottom: 20}}>
                 Chapters
               </Subheading>
-              <Surface style={{elevation: 1.3}}>
+              <Surface style={styles.subChapters}>
                 <ChapterItem title="Chapter 1 - ainul ganteng ea" />
                 <ChapterItem title="Chapter 2 - gatau ah" />
                 <ChapterItem title="Chapter 3 - males" />
                 <ChapterItem title="Chapter 4 - pen beli truck" />
                 <ChapterItem title="Chapter 5 - title yaaaaang sangaaat panjaaaaang" />
                 <View style={styles.buttonContainer}>
-                  <Button mode="outlined" onPress={() => {}} color="#1e88e5">
+                  <Button
+                    mode="outlined"
+                    onPress={() => this.props.navigation.navigate('Chapters')}
+                    color="#1e88e5">
                     view all chapters
                   </Button>
                 </View>
@@ -226,6 +230,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 20,
     paddingTop: 0,
+  },
+  subChapters: {
+    elevation: 1.3,
   },
   buttonContainer: {
     padding: 20,

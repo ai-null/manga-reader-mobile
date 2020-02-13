@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import {Provider as PaperProvider} from 'react-native-paper';
+import {Provider as ReduxProvider} from 'react-redux';
+import store from './app/src/redux/index';
 
 import AppContainer from './app/src/index';
 
@@ -11,9 +13,11 @@ type State = {
 export default class App extends React.Component<{}, State> {
   render() {
     return (
-      <PaperProvider>
-        <AppContainer />
-      </PaperProvider>
+      <ReduxProvider store={store}>
+        <PaperProvider>
+          <AppContainer />
+        </PaperProvider>
+      </ReduxProvider>
     );
   }
 }

@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react';
-import {View, StyleSheet, Text, TouchableNativeFeedback} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {Subheading, Paragraph} from 'react-native-paper';
 
-import {black3rd, DUMMIES_WORDS, white3rd} from '../config';
+import {black3rd} from '../config';
 import Tags from './Tags';
 
 type Props = {

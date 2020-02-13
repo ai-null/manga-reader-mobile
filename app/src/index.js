@@ -9,15 +9,30 @@ import {fromRight} from 'react-navigation-transitions';
 import Discover from './components/screens/Discover';
 import Detail from './components/screens/Detail';
 import Favorite from './components/screens/Favorite';
+import Chapters from './components/screens/Chapters';
+import Read from './components/screens/Read';
 import {white} from './config';
+
+const detailStack = createStackNavigator(
+  {
+    Detail,
+    Chapters,
+    Read,
+  },
+  {
+    transitionConfig: () => fromRight(),
+    initialRouteName: 'Detail',
+    headerMode: 'none',
+  },
+);
 
 const discoverStack = createStackNavigator(
   {
     Discover,
-    Detail,
+    detailStack,
   },
   {
-    transitionConfig: () => fromRight(),
+    transitionConfig: () => fromRight(400),
     initialRouteName: 'Discover',
     headerMode: 'none',
   },
@@ -26,7 +41,7 @@ const discoverStack = createStackNavigator(
 const favoriteStack = createStackNavigator(
   {
     Favorite,
-    Detail,
+    detailStack,
   },
   {
     transitionConfig: () => fromRight(),

@@ -8,9 +8,10 @@ TODO:
     ☐ Testing
 
   Process:
-    ✔ Make components First based on current screens (Detail) @started(19-12-21 13:40) @done(19-12-24 15:26) @lasted(3d1h46m47s)
+    ☐ make animation to appbar discover @low @started(19-12-27 14:59)
 
   Done:
+    ✔ Make components First based on current screens (Detail) @started(19-12-21 13:40) @done(19-12-24 15:26) @lasted(3d1h46m47s)
     ✔ Make components First based on current screens (Discover) @started(19-12-21 10:35) @done(19-12-21 13:40) @lasted(3h5m44s)
   
   Cancelled:
@@ -45,6 +46,10 @@ App:
       ✔ Show manga cover @done(19-12-24 15:27)
       ✔ Show manga description @done(19-12-24 15:27)
       ✔ Show manga tags @done(19-12-24 15:27)
+
+    Chapters:
+      ✔ Show list of chapters @done(19-12-31 21:30)
+      ☐ navigate to read @critical 
 
     Read (Slider):
     

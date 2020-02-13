@@ -1,43 +1,72 @@
+// @flow
 import React from 'react';
 import {StyleSheet, Dimensions, View} from 'react-native';
 import {Card as PaperCard, Text} from 'react-native-paper';
 import {black2nd} from '../config';
 
 type Props = {
-  title: string,
-  subtitle: string,
-  source: string,
+  title: String,
+  subtitle: String,
+  source: String,
+  type: String,
+};
+
+type State = {
+  uri: String,
+  isFailed: Boolean,
 };
 
 const {width} = Dimensions.get('window');
 
-// TODO: make simpler cards
-const Card = (props: Props) => {
-  const {title, subtitle, source} = props;
-  return (
-    <PaperCard style={styles.card} onPress={() => props.navigate('Detail')}>
-      <PaperCard.Cover
-        source={{uri: source}}
-        style={styles.cover}
-        resizeMode="cover"
-      />
-      <PaperCard.Content style={styles.contentContainer}>
-        <Text
-          numberOfLines={2}
-          children={title || 'Error'}
-          style={styles.title}
+class Card extends React.PureComponent<Props, State> {
+  constructor(props) {
+    super();
+
+    this.state = {
+      uri: require('../../assets/placeholder_no_image.png'),
+      isFailed: false,
+    };
+  }
+
+  _onError = () => {
+    this.setState({isFailed: true});
+  };
+
+  render() {
+    const {title, subtitle, source} = this.props;
+    const {uri, isFailed} = this.state;
+
+    return (
+      <PaperCard
+        style={styles.card}
+        onPress={() => this.props.navigate('Detail')}>
+        <PaperCard.Cover
+          source={isFailed ? uri : {uri: source}}
+          style={styles.cover}
+          defaultSource={require('../../assets/placeholder_no_image.png')}
+          onError={this._onError}
+          resizeMode="cover"
         />
-        <View style={styles.subtitleWrapper}>
+        <PaperCard.Content style={styles.contentContainer}>
           <Text
-            numberOfLines={1}
-            children={subtitle || 'Error'}
-            style={styles.subtitle}
+            numberOfLines={2}
+            children={title || 'Load failed'}
+            style={styles.title}
           />
-        </View>
-      </PaperCard.Content>
-    </PaperCard>
-  );
-};
+          <View style={styles.subtitleWrapper}>
+            <Text
+              numberOfLines={1}
+              children={
+                subtitle === 1 ? 'On going' : 'Completed' || 'Load failed'
+              }
+              style={styles.subtitle}
+            />
+          </View>
+        </PaperCard.Content>
+      </PaperCard>
+    );
+  }
+}
 
 export default Card;
 

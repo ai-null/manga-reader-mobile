@@ -1,133 +1,141 @@
 // @flow
-import React, {Component} from 'react';
-import {StyleSheet, StatusBar, SafeAreaView, FlatList} from 'react-native';
-
-import {white, white2nd} from '../../config';
+import React from 'react';
+import {
+  StyleSheet,
+  StatusBar,
+  SafeAreaView,
+  Animated,
+  Dimensions,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import Appbar from '../Appbar';
 import Card from '../Card';
+import {connect} from 'react-redux';
+import {white, white2nd} from '../../config';
+import {getDiscoverData} from '../../redux/actions/main';
+
+const HEADER_HEIGHT = 56;
+const {Value, event} = Animated;
+const {width} = Dimensions.get('window');
 
 type State = {
   data: array,
 };
 
-export default class Discover extends Component<{}, State, void> {
-  state = {
-    data: [
-      {
-        id: 1,
-        title: 'title sangat panjang',
-        subtitle: 'ainulbedjo',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 2,
-        title: 'title1',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 3,
-        title: 'title2',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 4,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 5,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 6,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 7,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 8,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 9,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 10,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 11,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-      {
-        id: 12,
-        title: 'title3',
-        source:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg',
-      },
-    ],
-  };
+class Discover extends React.Component<{}, State> {
+  constructor(props) {
+    super(props);
 
-  renderItem = ({item}) => {
-    const {title, subtitle, source} = item;
+    this.state = {
+      isReady: false,
+    };
+
+    this.scrollY = new Value(0);
+
+    this.onScroll = event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {y: this.scrollY},
+          },
+        },
+      ],
+      {
+        useNativeDriver: true,
+      },
+    );
+  }
+
+  componentDidMount() {
+    this.props.getDiscoverData(1);
+  }
+
+  _renderItem = ({item}) => {
+    const {t, im, s} = item;
+    const source = 'https://cdn.mangaeden.com/mangasimg/' + im;
 
     return (
-      <Card
-        title={title}
-        subtitle={subtitle}
-        source={source}
-        {...this.props.navigation}
-      />
+      <Card title={t} subtitle={s} source={source} {...this.props.navigation} />
     );
   };
 
   render() {
+    let translateY = Animated.diffClamp(
+      this.scrollY,
+      0,
+      HEADER_HEIGHT,
+    ).interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, -1],
+    });
+
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={white} />
-        <SafeAreaView>
-          <Appbar name="MangaEden" />
-          <FlatList
-            style={styles.flatlist}
-            contentContainerStyle={styles.content}
-            numColumns={3}
-            data={this.state.data}
-            renderItem={this.renderItem}
-            keyExtractor={key => JSON.stringify(key.id)}
-          />
+        <SafeAreaView style={styles.container}>
+          <Animated.View
+            style={{
+              ...styles.appbar,
+              transform: [{translateY}],
+            }}>
+            <Appbar name="MangaEden" />
+          </Animated.View>
+          {this.props.manga_list !== undefined ? (
+            <Animated.FlatList
+              onScroll={this.onScroll}
+              style={styles.flatlist}
+              contentContainerStyle={styles.content}
+              numColumns={3}
+              data={this.props.manga_list}
+              scrollEventThrottle={16}
+              renderItem={this._renderItem}
+              keyExtractor={key => key.i}
+              bounces={false}
+              alwaysBounceVertical={false}
+            />
+          ) : (
+            <ActivityIndicator color="red" size="large" />
+          )}
         </SafeAreaView>
       </>
     );
   }
 }
 
+const mapStateToPorps = state => {
+  return {
+    manga_list: state.main.manga_list,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getDiscoverData: page => getDiscoverData(page, dispatch),
+  };
+};
+
+// eslint-disable-next-line prettier/prettier
+export default connect(mapStateToPorps, mapDispatchToProps)(Discover);
+
 const styles = StyleSheet.create({
   flatlist: {
-    marginBottom: 56,
+    marginTop: 0,
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
   content: {
-    padding: 15,
+    padding: 5,
+    paddingTop: HEADER_HEIGHT + 15,
     backgroundColor: white2nd,
+    width: width,
+  },
+  appbar: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 1,
+    height: HEADER_HEIGHT,
   },
 });

@@ -4,7 +4,7 @@ import {TouchableNativeFeedback, View, Text, StyleSheet} from 'react-native';
 
 type Props = {
   data: Array,
-  onPress?: void,
+  onPress?: () => void,
 };
 
 const Tags = (props: Props) => {
