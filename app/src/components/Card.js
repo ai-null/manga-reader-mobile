@@ -2,17 +2,17 @@
 import React from 'react';
 import {StyleSheet, Dimensions, View} from 'react-native';
 import {Card as PaperCard, Text} from 'react-native-paper';
-import {black2nd, PLACEHOLDER_IMAGE} from '../config';
+import {black2nd, PLACEHOLDER_IMAGE, IMAGE_URI} from '../config';
 
 type Props = {
   title: String,
   subtitle: String,
   source: String,
-  type: String,
+  id: Number,
+  navigation: Object,
 };
 
 type State = {
-  uri: String,
   isFailed: Boolean,
 };
 
@@ -23,7 +23,6 @@ class Card extends React.PureComponent<Props, State> {
     super();
 
     this.state = {
-      uri: require('../../assets/placeholder_no_image.png'),
       isFailed: false,
     };
   }
@@ -32,20 +31,28 @@ class Card extends React.PureComponent<Props, State> {
     this.setState({isFailed: true});
   };
 
+  _onCardPress = () => {
+    const {id, title, subtitle, source} = this.props;
+    this.props.navigate('Detail', {
+      id,
+      title,
+      status: subtitle,
+      source,
+    });
+  };
+
   render() {
     const {title, subtitle, source} = this.props;
-    const {uri, isFailed} = this.state;
+    const {isFailed} = this.state;
 
     return (
-      <PaperCard
-        style={styles.card}
-        onPress={() => this.props.navigate('Detail')}>
+      <PaperCard style={styles.card} onPress={this._onCardPress}>
         <PaperCard.Cover
-          source={isFailed ? uri : {uri: PLACEHOLDER_IMAGE + source}}
+          source={isFailed ? PLACEHOLDER_IMAGE : {uri: IMAGE_URI + source}}
           style={styles.cover}
-          defaultSource={require('../../assets/placeholder_no_image.png')}
+          defaultSource={PLACEHOLDER_IMAGE}
           onError={this._onError}
-          resizeMode="cover"
+          progressiveRenderingEnabled
         />
         <PaperCard.Content style={styles.contentContainer}>
           <Text
@@ -84,8 +91,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cover: {
-    width: width / 3 - 15,
+    width: (width - 20) / 3,
     height: 150,
+    resizeMode: 'cover',
   },
   title: {
     fontWeight: '500',

@@ -8,8 +8,9 @@ import {black3rd} from '../config';
 import Tags from './Tags';
 
 type Props = {
-  section: string,
-  content: string,
+  section: String,
+  content: String,
+  categories: Array,
 };
 
 const Section = (props: Props) => {
@@ -19,7 +20,7 @@ const Section = (props: Props) => {
         <View style={styles.section}>
           <Subheading style={styles.subheading}>{props.section}</Subheading>
           <View style={styles.genresContainer}>
-            <Tags data={['Slice of life', 'Harem', 'Fantasy']} />
+            <Tags data={props.categories || []} />
           </View>
         </View>
       );
@@ -28,10 +29,7 @@ const Section = (props: Props) => {
       return (
         <View style={styles.section}>
           <Subheading style={styles.subheading}>{props.section}</Subheading>
-          <Paragraph style={styles.paragraph}>
-            {props.content ||
-              'pada suatu masa hiduplah saya pada suatu masa aowdkaodkodkaowdkwo pada suatu masa hiduplah saya pada suatu masa hiduplah saya'}
-          </Paragraph>
+          <Paragraph style={styles.paragraph}>{props.content}</Paragraph>
         </View>
       );
   }

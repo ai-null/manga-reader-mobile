@@ -6,7 +6,6 @@ import {
   SafeAreaView,
   Animated,
   Dimensions,
-  View,
   ActivityIndicator,
 } from 'react-native';
 import Appbar from '../Appbar';
@@ -26,10 +25,6 @@ type State = {
 class Discover extends React.Component<{}, State> {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isReady: false,
-    };
 
     this.scrollY = new Value(0);
 
@@ -52,10 +47,16 @@ class Discover extends React.Component<{}, State> {
   }
 
   _renderItem = ({item}) => {
-    const {t, im, s} = item;
+    const {i, t, im, s} = item;
 
     return (
-      <Card title={t} subtitle={s} source={im} {...this.props.navigation} />
+      <Card
+        id={i}
+        title={t}
+        subtitle={s}
+        source={im}
+        {...this.props.navigation}
+      />
     );
   };
 

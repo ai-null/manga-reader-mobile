@@ -44,14 +44,17 @@ export const DETAIL_MANGA = 'https://www.mangaeden.com/api/manga/';
  */
 export const CHAPTER = 'https://www.mangaeden.com/api/chapter/';
 
-export const PLACEHOLDER_IMAGE = 'https://cdn.mangaeden.com/mangasimg/';
+export const IMAGE_URI = 'https://cdn.mangaeden.com/mangasimg/';
+
+export const PLACEHOLDER_IMAGE = require('../assets/placeholder_no_image.png');
 
 // REDUX
 export const GET_DISCOVER_DATA = 'GET_DISCOVER_DATA';
 export const GET_DETAIL_MANGA = 'GET_DETAIL_MANGA';
+export const REMOVE_CURRENT_DATA = 'REMOVE_CURRENT_DATA';
 export const GET_CHAPTER = 'GET_CHAPTER';
 
-export const IMAGE_URI =
+export const DUMMY_IMAGE_URI =
   'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg';
 
 export const DUMMIES_WORDS =
