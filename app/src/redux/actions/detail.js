@@ -14,10 +14,10 @@ export const getDetailData = (id, dispatch) => {
       }
     })
     .then(e => {
-      const {aka, author, categories, description} = e;
+      const {aka, author, categories, description, chapters_len, chapters} = e;
       return dispatch({
         type: GET_DETAIL_MANGA,
-        payload: {aka, author, categories, description},
+        payload: {aka, author, categories, description, chapters_len, chapters},
       });
     })
     .catch(err => err);

@@ -7,7 +7,12 @@ export default class Read extends React.PureComponent {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
-        <Appbar backaction={true} name="Read" />
+        <Appbar
+          backAction
+          name="Read"
+          navigateTo="Detail"
+          {...this.props.navigation}
+        />
       </View>
     );
   }

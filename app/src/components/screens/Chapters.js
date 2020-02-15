@@ -137,7 +137,7 @@ export default class Chapters extends PureComponent<{}, State> {
         <StatusBar barStyle="dark-content" backgroundColor={white} />
         <SafeAreaView>
           <Appbar
-            backaction={true}
+            backAction
             name={this.props.navigation.state.routeName}
             {...this.props.navigation}
           />

@@ -1,5 +1,4 @@
 // @flow
-
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Subheading, Paragraph} from 'react-native-paper';
@@ -13,6 +12,8 @@ type Props = {
   categories: Array,
 };
 
+const f = e => (e.length === 0 ? 'No information provided' : e);
+
 const Section = (props: Props) => {
   switch (props.type) {
     case 'genres':
@@ -20,7 +21,13 @@ const Section = (props: Props) => {
         <View style={styles.section}>
           <Subheading style={styles.subheading}>{props.section}</Subheading>
           <View style={styles.genresContainer}>
-            <Tags data={props.categories || []} />
+            {props.categories.length === 0 ? (
+              <Paragraph style={styles.paragraph}>
+                No information provided
+              </Paragraph>
+            ) : (
+              <Tags data={props.categories || []} />
+            )}
           </View>
         </View>
       );
@@ -29,7 +36,7 @@ const Section = (props: Props) => {
       return (
         <View style={styles.section}>
           <Subheading style={styles.subheading}>{props.section}</Subheading>
-          <Paragraph style={styles.paragraph}>{props.content}</Paragraph>
+          <Paragraph style={styles.paragraph}>{f(props.content)}</Paragraph>
         </View>
       );
   }

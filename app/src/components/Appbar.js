@@ -7,8 +7,10 @@ import {Appbar as PaperAppBar} from 'react-native-paper';
 import {white, black3rd} from '../config';
 
 type Props = {
-  name: string,
-  backaction: boolean,
+  navigation: Object,
+  name: String,
+  backAction?: Boolean,
+  navigateTo?: String,
 };
 
 export default class Appbar extends React.PureComponent<Props, {}> {
@@ -23,10 +25,10 @@ export default class Appbar extends React.PureComponent<Props, {}> {
   };
 
   render() {
-    const {name, backaction} = this.props;
+    const {name, backAction} = this.props;
     return (
       <PaperAppBar style={styles.appbar}>
-        {backaction ? <PaperAppBar.BackAction onPress={this._onPress} /> : null}
+        {backAction ? <PaperAppBar.BackAction onPress={this._onPress} /> : null}
         <PaperAppBar.Content title={name} titleStyle={styles.title} />
       </PaperAppBar>
     );

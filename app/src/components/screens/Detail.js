@@ -14,7 +14,6 @@ import {Title, Surface, Button, Subheading} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import Appbar from '../Appbar';
 import Section from '../Section';
-import ChapterItem from '../ChapterItem';
 import {
   white,
   white2nd,
@@ -24,10 +23,12 @@ import {
 } from '../../config';
 import {connect} from 'react-redux';
 import {getDetailData, removeCurrentData} from '../../redux/actions/detail';
+import ChapterList from '../ChapterList';
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const {Value, event} = Animated;
 const THROTTLE = 50 + 155 + 20;
+const DEFAULT_APPBAR_HEIGHT = 56;
 
 class Detail extends React.Component {
   constructor(props) {
@@ -78,8 +79,14 @@ class Detail extends React.Component {
   };
 
   renderContent(translateY, title, status, uri) {
-    if (this.props.detail !== undefined) {
-      const {author, categories, description} = this.props.detail;
+    if (this.props.detail.hasOwnProperty('author')) {
+      const {
+        author,
+        categories,
+        description,
+        chapters,
+        chapters_len,
+      } = this.props.detail;
 
       return (
         <>
@@ -152,17 +159,13 @@ class Detail extends React.Component {
               Chapters
             </Subheading>
             <Surface style={styles.subChapters}>
-              <ChapterItem title="Chapter 1 - ainul ganteng ea" />
-              <ChapterItem title="Chapter 2 - gatau ah" />
-              <ChapterItem title="Chapter 3 - males" />
-              <ChapterItem title="Chapter 4 - pen beli truck" />
-              <ChapterItem title="Chapter 5 - title yaaaaang sangaaat panjaaaaang" />
+              <ChapterList data={chapters} chapters_len={chapters_len} />
               <View style={styles.buttonContainer}>
                 <Button
                   mode="outlined"
                   onPress={() => this.props.navigation.navigate('Chapters')}
                   color="#1e88e5">
-                  view all chapters
+                  view all {chapters_len} chapters
                 </Button>
               </View>
             </Surface>
@@ -171,7 +174,11 @@ class Detail extends React.Component {
       );
     }
 
-    return <ActivityIndicator color="red" size="large" />;
+    return (
+      <View style={styles.indicatorContainer}>
+        <ActivityIndicator color="red" size="large" />
+      </View>
+    );
   }
 
   render() {
@@ -188,7 +195,7 @@ class Detail extends React.Component {
         <StatusBar barStyle="dark-content" backgroundColor={white} />
         <SafeAreaView>
           <Appbar
-            backaction={true}
+            backAction
             navigateTo="Discover"
             name={title}
             {...this.props.navigation}
@@ -221,8 +228,10 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Detail);
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: white2nd},
-  scrollView: {marginBottom: 56},
+  container: {
+    backgroundColor: white2nd,
+  },
+  scrollView: {marginBottom: DEFAULT_APPBAR_HEIGHT},
   header: {elevation: 2, overflow: 'hidden'},
   backgroundCover: {
     width: width,
@@ -237,7 +246,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'relative',
   },
-  cover: {width: 105, height: 150, resizeMode: 'contain'},
+  cover: {width: 105, height: 150, resizeMode: 'cover'},
   titleWrapper: {
     justifyContent: 'flex-end',
     marginLeft: 10,
@@ -285,5 +294,11 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 10,
+  },
+  indicatorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: height - DEFAULT_APPBAR_HEIGHT,
   },
 });
