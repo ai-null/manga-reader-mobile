@@ -3,12 +3,13 @@ import {
   GET_DETAIL_MANGA,
   REMOVE_CURRENT_DATA,
 } from '../../config';
+import Http from '../../helper/http';
 
 export const getDetailData = (id, dispatch) => {
-  fetch(DETAIL_MANGA + id)
+  Http.get(DETAIL_MANGA + id)
     .then(e => {
-      if (e.ok) {
-        return e.json();
+      if (e.data) {
+        return e.data;
       } else {
         throw Error('Failed to request data from server');
       }

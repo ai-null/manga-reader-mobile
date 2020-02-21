@@ -1,18 +1,18 @@
 
 TODO:
   List:
-    ☐ Make components First based on current screens (Favorite)
-    ☐ Make components First based on current screens (Read)
-    ☐ Make Screens functions with dummies
-    ☐ Make redux controller with real data
-    ☐ Testing
+    ✔ Make components First based on current screens (Favorite) @done(20-02-17 14:26)
+    ✔ Make components First based on current screens (Read) @done(20-02-17 14:24)
+    ✔ Make Screens functions with dummies @done(20-02-17 14:24)
+    ✔ Make redux controller with real data @done(20-02-17 14:24)
+    ☐ Testing @high 
 
   Process:
-    ☐ make animation to appbar discover @low @started(19-12-27 14:59)
 
   Done:
     ✔ Make components First based on current screens (Detail) @started(19-12-21 13:40) @done(19-12-24 15:26) @lasted(3d1h46m47s)
     ✔ Make components First based on current screens (Discover) @started(19-12-21 10:35) @done(19-12-21 13:40) @lasted(3h5m44s)
+    ✔ make animation to appbar discover @low @started(19-12-27 14:59) @done(20-02-17 14:23) @lasted(7w2d23h24m40s)
   
   Cancelled:
 
@@ -22,7 +22,7 @@ TODO:
 App:
   COMPONENTS:
     ✔ Appbar @done(19-12-21 13:41)
-    ✔ Bottombar *(Discover + compass (?), Favorite + Heart)* @done(19-12-21 13:41)
+    ✔ Bottombar *(Discover with compass (?), Favorite with Heart)* @done(19-12-21 13:41)
     ✔ Card Items @done(19-12-21 13:41)
     ✔ Card Description @done(19-12-23 14:22)
     ✔ Header @done(19-12-23 14:22)
@@ -37,7 +37,7 @@ App:
     
     Discover:
       ✔ Show Appbar with sourceName @done(19-12-21 13:41)
-      ☐ Show list of manga (from newest to oldest) @high 
+      ✘ Show list of manga (from newest to oldest) @high @cancelled(20-02-17 14:24)
       ✔ Infinite scroll ? No, just show 40 listings @done(19-12-21 13:41)
       ✔ Show Bottombar @done(19-12-21 13:42)
     
@@ -49,7 +49,7 @@ App:
 
     Chapters:
       ✔ Show list of chapters @done(19-12-31 21:30)
-      ☐ navigate to read @critical 
+      ✔ navigate to read @critical @done(20-02-17 14:25)
 
     Read (Slider):
     

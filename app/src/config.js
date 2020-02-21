@@ -1,9 +1,11 @@
+export const BASE_URL = 'https://www.mangaeden.com/api';
+export const BASE_IMAGE_URI = 'https://cdn.mangaeden.com/mangasimg/';
 /*
   Returned data:
     - dictionaries in the key "manga" contains the manga's image ("im"), title ("t"), ID ("i"), alias ("a"), status ("s"), category ("c"), last chapter date ("ld"), hits ("h")
     - "page", "start", "end" and "total" are self explanatory
  */
-export const MANGA_LIST = 'https://www.mangaeden.com/api/list/0/';
+export const MANGA_LIST = '/list/0/';
 
 /*
   == Manga List splitted in pages ==
@@ -12,7 +14,7 @@ export const MANGA_LIST = 'https://www.mangaeden.com/api/list/0/';
   Same as above but returns only 500 manga's informations
   (from manga X*500 to (X+1)*500, where X is the page fetched from the GET parameter 'p')
  */
-export const MANGA_LIST_PAGING = 'https://www.mangaeden.com/api/list/0/?p=';
+export const MANGA_LIST_PAGING = '/list/0/?p=';
 
 /*
   == Manga info and chapters list ==
@@ -32,7 +34,7 @@ export const MANGA_LIST_PAGING = 'https://www.mangaeden.com/api/list/0/?p=';
     "4e711cb0c09225616d037cc2" # <-- chapter's ID (chapter.id in the next section)
     ],
  */
-export const DETAIL_MANGA = 'https://www.mangaeden.com/api/manga/';
+export const DETAIL_MANGA = '/manga/';
 
 /*
   == Chapter pages ==
@@ -42,9 +44,7 @@ export const DETAIL_MANGA = 'https://www.mangaeden.com/api/manga/';
   Where [chapter.id] is the chapter's id you can get with the previous api call.
   Returned data: the images's urls and sizes of the chapter
  */
-export const CHAPTER = 'https://www.mangaeden.com/api/chapter/';
-
-export const IMAGE_URI = 'https://cdn.mangaeden.com/mangasimg/';
+export const CHAPTER = '/chapter/';
 
 export const PLACEHOLDER_IMAGE = require('../assets/placeholder_no_image.png');
 

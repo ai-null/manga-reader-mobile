@@ -8,8 +8,7 @@ type Props = {
 };
 
 const Tags = (props: Props) => {
-  let {data, onPress = () => {}} = props;
-  console.log(data);
+  let {data, onPress} = props;
 
   return data.map((tag, index) => (
     <TouchableNativeFeedback onPress={onPress} key={index}>

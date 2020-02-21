@@ -1,10 +1,11 @@
 import {MANGA_LIST_PAGING, GET_DISCOVER_DATA} from '../../config';
+import Http from '../../helper/http';
 
 export const getDiscoverData = (page, dispatch) => {
-  fetch(MANGA_LIST_PAGING + page)
+  Http.get(MANGA_LIST_PAGING + page)
     .then(e => {
-      if (e.ok) {
-        return e.json();
+      if (e.data) {
+        return e.data;
       } else {
         throw Error('Failed to request data from server');
       }

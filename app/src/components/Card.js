@@ -2,7 +2,7 @@
 import React from 'react';
 import {StyleSheet, Dimensions, View} from 'react-native';
 import {Card as PaperCard, Text} from 'react-native-paper';
-import {black2nd, PLACEHOLDER_IMAGE, IMAGE_URI} from '../config';
+import {black2nd, PLACEHOLDER_IMAGE, BASE_IMAGE_URI} from '../config';
 
 type Props = {
   title: String,
@@ -48,7 +48,7 @@ class Card extends React.PureComponent<Props, State> {
     return (
       <PaperCard style={styles.card} onPress={this._onCardPress}>
         <PaperCard.Cover
-          source={isFailed ? PLACEHOLDER_IMAGE : {uri: IMAGE_URI + source}}
+          source={isFailed ? PLACEHOLDER_IMAGE : {uri: BASE_IMAGE_URI + source}}
           style={styles.cover}
           defaultSource={PLACEHOLDER_IMAGE}
           onError={this._onError}

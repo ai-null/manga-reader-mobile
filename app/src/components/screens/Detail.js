@@ -19,7 +19,7 @@ import {
   white2nd,
   black3rd,
   PLACEHOLDER_IMAGE,
-  IMAGE_URI,
+  BASE_IMAGE_URI,
 } from '../../config';
 import {connect} from 'react-redux';
 import {getDetailData, removeCurrentData} from '../../redux/actions/detail';
@@ -67,8 +67,8 @@ class Detail extends React.Component {
 
   _onFavoritePress = () => {
     let message = this.state.favorite
-      ? 'removed from favorite'
-      : 'added to favorite';
+      ? 'Removed from favorite'
+      : 'Added to favorite';
 
     this.setState({favorite: !this.state.favorite});
     ToastAndroid.show(message, 2000);
@@ -183,7 +183,7 @@ class Detail extends React.Component {
 
   render() {
     const {title, status, source} = this.props.navigation.state.params;
-    const uri = IMAGE_URI + source;
+    const uri = BASE_IMAGE_URI + source;
     let translateY = this.scrollY.interpolate({
       inputRange: [0, THROTTLE],
       outputRange: [0, THROTTLE / 2 - 20],
