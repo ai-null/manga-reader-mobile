@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import {StyleSheet, Dimensions, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Card as PaperCard, Text} from 'react-native-paper';
 import {black2nd, PLACEHOLDER_IMAGE, BASE_IMAGE_URI} from '../config';
 
@@ -15,8 +15,6 @@ type Props = {
 type State = {
   isFailed: Boolean,
 };
-
-const {width} = Dimensions.get('window');
 
 class Card extends React.PureComponent<Props, State> {
   constructor(props) {
@@ -79,6 +77,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
+    width: 'auto',
     marginVertical: 5,
     marginHorizontal: 2.5,
     flex: 1,
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cover: {
-    width: (width - 20) / 3,
+    width: 'auto',
     height: 150,
     resizeMode: 'cover',
   },

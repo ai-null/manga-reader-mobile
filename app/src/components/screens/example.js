@@ -1,16 +1,16 @@
 // @flow
-import * as React from "react";
-import { Animated } from "react-native";
-import { ContextConsumer } from "./Context";
-import { STATUS_BAR_HEIGHT } from "../constants";
-import type { CollapsibleProps } from "../types";
+import * as React from 'react';
+import {Animated} from 'react-native';
+import {ContextConsumer} from './Context';
+import {STATUS_BAR_HEIGHT} from '../constants';
+import type {CollapsibleProps} from '../types';
 
 class Collapsible extends React.Component<CollapsibleProps> {
   static defaultProps = {
     active: true,
     stayCollapsed: false,
     style: {},
-    height: 0
+    height: 0,
   };
 
   render() {
@@ -22,7 +22,7 @@ class Collapsible extends React.Component<CollapsibleProps> {
       height,
       animatedValue,
       transitionPoint,
-      stayCollapsed
+      stayCollapsed,
     } = this.props;
 
     let translateY: number | Animated.Value = 0;
@@ -30,10 +30,10 @@ class Collapsible extends React.Component<CollapsibleProps> {
       translateY = animatedValue.interpolate({
         inputRange: [
           transitionPoint - navigationBarHeight,
-          transitionPoint - STATUS_BAR_HEIGHT
+          transitionPoint - STATUS_BAR_HEIGHT,
         ],
         outputRange: [0, -navigationBarHeight + STATUS_BAR_HEIGHT],
-        extrapolate: "clamp"
+        extrapolate: 'clamp',
       });
     } else if (active) {
       translateY = Animated.multiply(
@@ -41,15 +41,15 @@ class Collapsible extends React.Component<CollapsibleProps> {
           animatedValue.interpolate({
             inputRange: [
               transitionPoint - navigationBarHeight,
-              transitionPoint - navigationBarHeight + 1
+              transitionPoint - navigationBarHeight + 1,
             ],
             outputRange: [0, 1],
-            extrapolateLeft: "clamp"
+            extrapolateLeft: 'clamp',
           }),
           0,
-          height
+          height,
         ),
-        -1
+        -1,
       );
     }
     return (
@@ -60,18 +60,18 @@ class Collapsible extends React.Component<CollapsibleProps> {
         style={[
           {
             zIndex: 1,
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             right: 0,
             left: 0,
             bottom: 0,
             transform: [
               {
-                translateY
-              }
-            ]
+                translateY,
+              },
+            ],
           },
-          style
+          style,
         ]}>
         {children}
       </Animated.View>

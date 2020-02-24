@@ -4,9 +4,10 @@ import {
   StyleSheet,
   StatusBar,
   SafeAreaView,
-  Animated,
-  Dimensions,
   ActivityIndicator,
+  Animated,
+  View,
+  Dimensions,
 } from 'react-native';
 import Appbar from '../Appbar';
 import Card from '../Card';
@@ -15,8 +16,8 @@ import {white, white2nd} from '../../config';
 import {getDiscoverData} from '../../redux/actions/main';
 
 const HEADER_HEIGHT = 56;
-const {Value, event} = Animated;
-const {width} = Dimensions.get('window');
+const {Value, event, diffClamp, multiply} = Animated;
+const {height} = Dimensions.get('window');
 
 type State = {
   data: array,
@@ -61,19 +62,25 @@ class Discover extends React.Component<{}, State> {
   };
 
   render() {
-    let translateY = Animated.diffClamp(
-      this.scrollY,
-      0,
-      HEADER_HEIGHT,
-    ).interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, -1],
-    });
+    let translateY = multiply(
+      diffClamp(
+        this.scrollY.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1],
+          extrapolateLeft: 'clamp',
+        }),
+        0,
+        HEADER_HEIGHT + 2,
+      ),
+      -1,
+    );
+
+    // 112.0, 242.0
 
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={white} />
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
           <Animated.View
             style={{
               ...styles.appbar,
@@ -95,7 +102,9 @@ class Discover extends React.Component<{}, State> {
               alwaysBounceVertical={false}
             />
           ) : (
-            <ActivityIndicator color="red" size="large" />
+            <View style={styles.indicatorContainer}>
+              <ActivityIndicator color="red" size="large" />
+            </View>
           )}
         </SafeAreaView>
       </>
@@ -122,16 +131,17 @@ const styles = StyleSheet.create({
   flatlist: {
     marginTop: 0,
   },
-  container: {
+  indicatorContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    marginTop: height / 2,
   },
   content: {
     padding: 5,
     paddingTop: HEADER_HEIGHT + 15,
     backgroundColor: white2nd,
-    width: width,
+    // width: 'auto',
   },
   appbar: {
     ...StyleSheet.absoluteFillObject,

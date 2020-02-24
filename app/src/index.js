@@ -1,9 +1,11 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+import {
+  createStackNavigator,
+  StackViewTransitionConfigs,
+} from 'react-navigation-stack';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
-import {fromRight} from 'react-navigation-transitions';
 
 // screens
 import Discover from './components/screens/Discover';
@@ -13,6 +15,8 @@ import Chapters from './components/screens/Chapters';
 import Read from './components/screens/Read';
 import {white} from './config';
 
+const {SlideFromRightIOS} = StackViewTransitionConfigs;
+
 const detailStack = createStackNavigator(
   {
     Detail,
@@ -20,7 +24,7 @@ const detailStack = createStackNavigator(
     Read,
   },
   {
-    transitionConfig: () => fromRight(),
+    transitionConfig: () => SlideFromRightIOS,
     initialRouteName: 'Detail',
     headerMode: 'none',
   },
@@ -32,7 +36,7 @@ const discoverStack = createStackNavigator(
     detailStack,
   },
   {
-    transitionConfig: () => fromRight(400),
+    transitionConfig: () => SlideFromRightIOS,
     initialRouteName: 'Discover',
     headerMode: 'none',
   },
@@ -44,7 +48,7 @@ const favoriteStack = createStackNavigator(
     detailStack,
   },
   {
-    transitionConfig: () => fromRight(),
+    transitionConfig: () => SlideFromRightIOS,
     initialRouteName: 'Favorite',
     headerMode: 'none',
   },

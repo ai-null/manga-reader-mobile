@@ -9,116 +9,18 @@ import {
 import Appbar from '../Appbar';
 import ChapterItem from '../ChapterItem';
 import {white, white3rd} from '../../config';
+import {connect} from 'react-redux';
 
 const ITEM_HEIGHT = 49.0;
 
-type State = {
-  chapters: array,
-};
-
-export default class Chapters extends PureComponent<{}, State> {
+class Chapters extends PureComponent<{}, {}> {
   constructor(props) {
     super(props);
-
-    this.state = {
-      chapters: [
-        'Chapter 1 - ainul ganteng ea',
-        'Chapter 2 - gatau ah',
-        'Chapter 3 - males',
-        'Chapter 4 - pen beli truck',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-        'Chapter 5 - title yaaaaang sangaaat panjaaaaang',
-      ],
-    };
   }
 
   _renderItem = ({item}) => {
-    return <ChapterItem title={item} />;
+    const t = `Chapter ${item[0]}`;
+    return <ChapterItem title={t} />;
   };
 
   _renderLoading = () => {
@@ -132,6 +34,8 @@ export default class Chapters extends PureComponent<{}, State> {
   });
 
   render() {
+    let detail = this.props.detail;
+    let data = detail.hasOwnProperty('chapters') ? detail.chapters : [];
     return (
       <>
         <StatusBar barStyle="dark-content" backgroundColor={white} />
@@ -144,9 +48,9 @@ export default class Chapters extends PureComponent<{}, State> {
           <FlatList
             style={styles.flatlist}
             contentContainerStyle={{backgroundColor: white}}
-            data={this.state.chapters}
+            data={data}
             renderItem={this._renderItem}
-            keyExtractor={(item, index) => JSON.stringify(index)}
+            keyExtractor={(item, index) => detail.chapters[index][3]}
             initialNumToRender={15}
             maxToRenderPerBatch={15}
             windowSize={17}
@@ -154,16 +58,18 @@ export default class Chapters extends PureComponent<{}, State> {
             ListEmptyComponent={this._renderLoading}
             removeClippedSubviews={true}
           />
-          {/* <View style={styles.container}>
-            {this.state.chapters.map(e => (
-              <ChapterItem title={e} />
-            ))}
-          </View> */}
         </SafeAreaView>
       </>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  detail: state.detail,
+});
+
+// eslint-disable-next-line prettier/prettier
+export default connect(mapStateToProps, null)(Chapters);
 
 const styles = StyleSheet.create({
   flatlist: {

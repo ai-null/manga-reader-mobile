@@ -7,10 +7,9 @@ import {
   Image,
   Dimensions,
   ToastAndroid,
-  Animated,
   ActivityIndicator,
 } from 'react-native';
-import {Title, Surface, Button, Subheading} from 'react-native-paper';
+import Animated from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 import Appbar from '../Appbar';
 import Section from '../Section';
@@ -23,14 +22,15 @@ import {
 } from '../../config';
 import {connect} from 'react-redux';
 import {getDetailData, removeCurrentData} from '../../redux/actions/detail';
-import ChapterList from '../ChapterList';
 
 const {width, height} = Dimensions.get('window');
 const {Value, event} = Animated;
 const THROTTLE = 50 + 155 + 20;
 const DEFAULT_APPBAR_HEIGHT = 56;
 
-class Detail extends React.Component {
+let ChapterList = null;
+
+class Detail extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -78,7 +78,13 @@ class Detail extends React.Component {
     this.props.navigation.navigate('Read');
   };
 
-  renderContent(translateY, title, status, uri) {
+  renderContent(title, status, uri) {
+    let translateY = this.scrollY.interpolate({
+      inputRange: [0, THROTTLE],
+      outputRange: [0, THROTTLE / 2 - 20],
+      extrapolate: 'clamp',
+    });
+
     if (this.props.detail.hasOwnProperty('author')) {
       const {
         author,
@@ -87,6 +93,8 @@ class Detail extends React.Component {
         chapters,
         chapters_len,
       } = this.props.detail;
+      ChapterList = require('../ChapterList').default;
+      let {Title, Surface, Button, Subheading} = require('react-native-paper');
 
       return (
         <>
@@ -184,11 +192,6 @@ class Detail extends React.Component {
   render() {
     const {title, status, source} = this.props.navigation.state.params;
     const uri = BASE_IMAGE_URI + source;
-    let translateY = this.scrollY.interpolate({
-      inputRange: [0, THROTTLE],
-      outputRange: [0, THROTTLE / 2 - 20],
-      extrapolate: 'clamp',
-    });
 
     return (
       <>
@@ -207,7 +210,7 @@ class Detail extends React.Component {
             contentContainerStyle={styles.container}
             style={styles.scrollView}
             showsVerticalScrollIndicator={false}>
-            {this.renderContent(translateY, title, status, uri)}
+            {this.renderContent(title, status, uri)}
           </Animated.ScrollView>
         </SafeAreaView>
       </>
