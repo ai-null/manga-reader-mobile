@@ -51,8 +51,10 @@ export const PLACEHOLDER_IMAGE = require('../assets/placeholder_no_image.png');
 // REDUX
 export const GET_DISCOVER_DATA = 'GET_DISCOVER_DATA';
 export const GET_DETAIL_MANGA = 'GET_DETAIL_MANGA';
-export const REMOVE_CURRENT_DATA = 'REMOVE_CURRENT_DATA';
 export const GET_CHAPTER = 'GET_CHAPTER';
+export const GET_READ_DATA = 'GET_READ_DATA';
+
+export const REMOVE_CURRENT_DATA = 'REMOVE_CURRENT_DATA';
 
 export const DUMMY_IMAGE_URI =
   'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg';

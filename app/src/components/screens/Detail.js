@@ -8,8 +8,8 @@ import {
   Dimensions,
   ToastAndroid,
   ActivityIndicator,
+  Animated,
 } from 'react-native';
-import Animated from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 import Appbar from '../Appbar';
 import Section from '../Section';
@@ -75,7 +75,8 @@ class Detail extends React.PureComponent {
   };
 
   _onReadPress = () => {
-    this.props.navigation.navigate('Read');
+    const {chapters} = this.props.detail;
+    this.props.navigation.navigate('Read', {id: chapters[0][3]});
   };
 
   renderContent(title, status, uri) {

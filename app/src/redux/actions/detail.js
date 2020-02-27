@@ -3,10 +3,11 @@ import {
   GET_DETAIL_MANGA,
   REMOVE_CURRENT_DATA,
 } from '../../config';
-import Http from '../../helper/http';
+import {instance} from '../../helper/http';
 
 export const getDetailData = (id, dispatch) => {
-  Http.get(DETAIL_MANGA + id)
+  instance
+    .get(DETAIL_MANGA + id)
     .then(e => {
       if (e.data) {
         return e.data;

@@ -1,8 +1,21 @@
+// @flow
 import React from 'react';
 import {View, StyleSheet, StatusBar} from 'react-native';
 import Appbar from '../Appbar';
 
-export default class Read extends React.PureComponent {
+import {connect} from 'react-redux';
+import {getReadData} from '../../redux/actions/read';
+
+type Props = {
+  navigation: Object,
+};
+
+class Read extends React.PureComponent<Props, {}> {
+  componentDidMount() {
+    const {id} = this.props.navigation.state.params;
+    this.props.getReadData(id.toString());
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -17,6 +30,17 @@ export default class Read extends React.PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  read: state.read,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getReadData: id => getReadData(id, dispatch),
+});
+
+// eslint-disable-next-line prettier/prettier
+export default connect(mapStateToProps, mapDispatchToProps)(Read);
 
 const styles = StyleSheet.create({
   container: {
