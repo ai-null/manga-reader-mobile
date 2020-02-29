@@ -76,7 +76,9 @@ class Detail extends React.PureComponent {
 
   _onReadPress = () => {
     const {chapters} = this.props.detail;
-    this.props.navigation.navigate('Read', {id: chapters[0][3]});
+    const id = chapters[0][3];
+
+    this.props.navigation.navigate('Read', {id});
   };
 
   renderContent(title, status, uri) {

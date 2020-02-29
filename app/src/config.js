@@ -47,6 +47,7 @@ export const DETAIL_MANGA = '/manga/';
 export const CHAPTER = '/chapter/';
 
 export const PLACEHOLDER_IMAGE = require('../assets/placeholder_no_image.png');
+export const DUMMY_IMAGE_LOCAL = require('../assets/under_construction210x300.png');
 
 // REDUX
 export const GET_DISCOVER_DATA = 'GET_DISCOVER_DATA';
