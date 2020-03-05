@@ -9,28 +9,36 @@ import {
   Dimensions,
 } from 'react-native';
 import Appbar from '../Appbar';
-import {DUMMY_IMAGE_LOCAL} from '../../config';
+import {BASE_IMAGE_URI} from '../../config';
 
 import {connect} from 'react-redux';
-import {getReadData} from '../../redux/actions/read';
+import {getReadData, removeCurrentReadData} from '../../redux/actions/read';
 
 type Props = {
   navigation: Object,
+  read: Object,
+  getReadData: () => void,
+  removeCurrentReadData: () => void,
 };
 
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const ITEM_HEIGHT = 500;
 
 class Read extends React.PureComponent<Props, {}> {
-  // componentDidMount() {
-  //   const {id} = this.props.navigation.state.params;
-  //   this.props.getReadData(id.toString());
+  componentDidMount() {
+    const {id} = this.props.navigation.state.params;
+    this.props.getReadData(id.toString());
+  }
+
+  // componentWillUnmount() {
+  //   this.props.removeCurrentReadData();
   // }
 
   renderItem({item}) {
+    const url = BASE_IMAGE_URI + item[1];
     return (
       <View style={styles.imageContainer}>
-        <Image source={item[0]} style={styles.imageItem} />
+        <Image source={{uri: url}} style={styles.imageItem} />
       </View>
     );
   }
@@ -44,10 +52,11 @@ class Read extends React.PureComponent<Props, {}> {
   }
 
   render() {
-    const images = Array.from({length: 200}).fill([DUMMY_IMAGE_LOCAL]);
+    // const images = Array.from({length: 200}).fill([DUMMY_IMAGE_LOCAL]);
+    const {images} = this.props.read;
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
+        <StatusBar barStyle="dark-content" />
         <Appbar
           backAction
           name="Read"
@@ -65,6 +74,7 @@ class Read extends React.PureComponent<Props, {}> {
           maxToRenderPerBatch={3}
           getItemLayout={this.getItemLayout}
           showsHorizontalScrollIndicator={false}
+          // initialScrollIndex={images.length ? 0 : images.length - 1}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
@@ -78,6 +88,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getReadData: id => getReadData(id, dispatch),
+  removeCurrentReadData: () => removeCurrentReadData(dispatch),
 });
 
 // eslint-disable-next-line prettier/prettier

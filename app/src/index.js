@@ -25,7 +25,7 @@ const detailStack = createStackNavigator(
   },
   {
     transitionConfig: () => SlideFromRightIOS,
-    initialRouteName: 'Read',
+    initialRouteName: 'Detail',
     headerMode: 'none',
   },
 );
@@ -93,4 +93,4 @@ const rootStack = createMaterialBottomTabNavigator(
   },
 );
 
-export default createAppContainer(detailStack);
+export default createAppContainer(rootStack);

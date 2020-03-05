@@ -43,6 +43,13 @@ export const DETAIL_MANGA = '/manga/';
   Example: https://www.mangaeden.com/api/chapter/4e711cb0c09225616d037cc2/
   Where [chapter.id] is the chapter's id you can get with the previous api call.
   Returned data: the images's urls and sizes of the chapter
+  example:
+  [
+    0, <-- page
+    "6d/6df62063ffa4770700b20633a51bb2234fbe6d34ad59743ec5fff805.jpg", <-- url
+    800, <-- width
+    1200 <-- height
+  ]
  */
 export const CHAPTER = '/chapter/';
 
@@ -56,6 +63,7 @@ export const GET_CHAPTER = 'GET_CHAPTER';
 export const GET_READ_DATA = 'GET_READ_DATA';
 
 export const REMOVE_CURRENT_DATA = 'REMOVE_CURRENT_DATA';
+export const REMOVE_CURRENT_READ_DATA = 'REMOVE_CURRENT_READ_DATA';
 
 export const DUMMY_IMAGE_URI =
   'https://upload.wikimedia.org/wikipedia/en/thumb/d/d6/Shingeki_no_Kyojin_manga_volume_1.jpg/220px-Shingeki_no_Kyojin_manga_volume_1.jpg';
