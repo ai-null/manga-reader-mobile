@@ -1,28 +1,21 @@
 // @flow
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  StatusBar,
-  FlatList,
-  Image,
-  Dimensions,
-} from 'react-native';
+import {View, StyleSheet, StatusBar, FlatList, Dimensions} from 'react-native';
 import Appbar from '../Appbar';
 import {BASE_IMAGE_URI} from '../../config';
 
 import {connect} from 'react-redux';
 import {getReadData, removeCurrentReadData} from '../../redux/actions/read';
+import ImageChapter from '../ImageChapter';
+
+const {width} = Dimensions.get('window');
 
 type Props = {
   navigation: Object,
   read: Object,
   getReadData: () => void,
-  removeCurrentReadData: () => void,
+  removeCurrentReadData?: () => void,
 };
-
-const {width} = Dimensions.get('window');
-const ITEM_HEIGHT = 500;
 
 class Read extends React.PureComponent<Props, {}> {
   componentDidMount() {
@@ -30,17 +23,14 @@ class Read extends React.PureComponent<Props, {}> {
     this.props.getReadData(id.toString());
   }
 
-  // componentWillUnmount() {
-  //   this.props.removeCurrentReadData();
-  // }
+  componentWillUnmount() {
+    this.props.removeCurrentReadData();
+  }
 
   renderItem({item}) {
     const url = BASE_IMAGE_URI + item[1];
-    return (
-      <View style={styles.imageContainer}>
-        <Image source={{uri: url}} style={styles.imageItem} />
-      </View>
-    );
+
+    return <ImageChapter source={url} />;
   }
 
   getItemLayout(data, index) {
@@ -53,7 +43,7 @@ class Read extends React.PureComponent<Props, {}> {
 
   render() {
     // const images = Array.from({length: 200}).fill([DUMMY_IMAGE_LOCAL]);
-    const {images} = this.props.read;
+    const images = this.props.read.images;
     return (
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
@@ -74,7 +64,7 @@ class Read extends React.PureComponent<Props, {}> {
           maxToRenderPerBatch={3}
           getItemLayout={this.getItemLayout}
           showsHorizontalScrollIndicator={false}
-          // initialScrollIndex={images.length ? 0 : images.length - 1}
+          initialScrollIndex={images ? images.length - 1 : 0}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>
@@ -97,17 +87,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Read);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
-  },
-  imageItem: {
-    height: ITEM_HEIGHT,
-    width: width,
-    resizeMode: 'contain',
-  },
-  imageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: 'black',
   },
 });
